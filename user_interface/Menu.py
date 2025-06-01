@@ -1,8 +1,7 @@
-from Logic.words import zero
-from Logic.words import X
-from  Logic.numbers import num
-from Logic.game_field import draw_grid, board
-from Logic.render_grid import cells
+from logic.words import zero, X
+from logic.numbers import num
+from logic.game_field import draw_grid, board
+from logic.render_grid import cells
 
 print('За какую сторону вы хотите играть')
 choice_team = input()
