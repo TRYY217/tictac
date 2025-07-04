@@ -2,12 +2,16 @@
     h1 {
         font-family: Courier, Monospace;
         color: white;
-        position: absolute;
+        position: relative;
         text-align: center;
-        top: 30%;
-        left: 43%;
+        top: -250px;
+        left: 0;
     }
-    body { background-color: #000000; }
+
+    body {
+        background-color: #000000;
+    }
+
     .button-86 {
         all: unset;
         width: 100px;
@@ -75,18 +79,17 @@
         transition: 0s;
         transform: translate(0, 5%);
     }
+
     .button-86 {
-        position: absolute;
-        top: 45%;
+        position: relative;
+        top: 450px;
         left: 46.55%;
     }
+
     img.back {
-        position: absolute;
-        top: 20%;
+        position: relative;
+        top: 100px;
         left: 32%;
-        opacity: 0.5;
-    }
-    img {
         opacity: 0.5;
     }
     .button-40 {
@@ -97,7 +100,7 @@
         color: #FFFFFF;
         cursor: pointer;
         flex: 0 0 auto;
-        font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        font-family: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         font-size: 1.125rem;
         font-weight: 600;
         line-height: 1.5rem;
@@ -106,7 +109,7 @@
         text-decoration: none #6B7280 solid;
         text-decoration-thickness: auto;
         transition-duration: .2s;
-        transition-property: background-color,border-color,color,fill,stroke;
+        transition-property: background-color, border-color, color, fill, stroke;
         transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
         user-select: none;
         -webkit-user-select: none;
@@ -129,18 +132,34 @@
             padding: .75rem 1.5rem;
         }
     }
+
     .butttic {
         position: absolute;
-        top: -10%;
+        top: -2000px;
         left: 39%;
 
     }
+
     .butttac {
         position: absolute;
-        top: -10%;
+        top: -2000px;
         left: 55%;
     }
 
+    canvas {
+        position: fixed; /* или absolute, если внутри контейнера */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9998; /* больше, чем у других элементов */
+        pointer-events: none; /* если не нужно обрабатывать клики, иначе убери */
+    }
+    .endbutton {
+        position: relative;
+        top: -100%;
+        z-index: 9999;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -150,27 +169,24 @@
     <title>TicTacToePage</title>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script src="../user_interface/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
 </head>
 <body>
-
 <div id="butt">
-    <button class="button-86" role="button" onclick="fade(), fadetictacbutton(), fadebutton(), fadetext()">Play</button>
+    <button class="button-86" role="button" id="play">Play</button>
 </div>
-
-
 <p id="backgr">
     <img class="back" src="../material/play_background.jpg" width="700" height="500">
-
-  <img src="../material/m.png" width=100% height=99%>
 </p>
 <h1 id="text">TicTacToe game</h1>
- <div class="butttic" id = "buttic">
-     <button class="button-40" role="button" onclick="fadetictacbuttonhide()">Крестик</button>
- </div>
- <div class="butttac" id = "buttac">
-     <button class="button-40" role="button" onclick="fadetictacbuttonhide()">Нолик</button>
- </div>
-
+<div id="three-container" style="position: relative; z-index: 10;">
+    <canvas></canvas>
+</div>
+<div id="endbutton" class="endbutton">
+    <button class="button-86" role="button" id="restart" onclick="checkandreset()">Restart</button>
+</div>
 <script src="button_script.js"></script>
+
 </body>
 </html>
